@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Stock</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../img/stock.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+<!-- 头部 -->
+<header>
+    <h2 class="title">&nbsp;股市总览</h2>
+</header>
+<!-- 内容 -->
+<section>
+    <div class="row">
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="../img/banner-1.jpg" alt="...">
+                <div class="caption">
+                    <p class="lead">紫光股份</p>
+                    <p id="price_unis">当前价格：</p>
+                    <p id="buy_unis">Buy:</p>
+                    <p id="sale_unis">Sale:</p>
+                    <p id="number_unis">成交股票数：</p>
+<!--                    <p id="amount_unis">成交金额：</p>-->
+                    <button data-name="sz000938" class="btn btn-primary">价格走势</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="../img/banner-2.jpg" alt="...">
+                <div class="caption">
+                    <p class="lead">朗科科技</p>
+                    <p id="price_netac">当前价格：</p>
+                    <p id="buy_netac">Buy:</p>
+                    <p id="sale_netac">Sale:</p>
+                    <p id="number_netac">成交股票数：</p>
+<!--                    <p id="amount_netac">成交金额：</p>-->
+                    <button data-name="sz300042" class="btn btn-primary">价格走势</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="../img/banner-3.jpg" alt="...">
+                <div class="caption">
+                    <p class="lead">网宿科技</p>
+                    <p id="price_wangsu">当前价格：</p>
+                    <p id="buy_wangsu">Buy:</p>
+                    <p id="sale_wangsu">Sale:</p>
+                    <p id="number_wangsu">成交股票数：</p>
+<!--                    <p id="amount_wangsu">成交金额：</p>-->
+                    <button data-name="sz300017" class="btn btn-primary">价格走势</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="../img/banner-4.jpg" alt="...">
+                <div class="caption">
+                    <p class="lead">机器人</p>
+                    <p id="price_robot">当前价格：</p>
+                    <p id="buy_robot">Buy:</p>
+                    <p id="sale_robot">Sale:</p>
+                    <p id="number_robot">成交股票数：</p>
+<!--                    <p id="amount_robot">成交金额：</p>-->
+                    <button data-name="sz300024" class="btn btn-primary">价格走势</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 图表 -->
+<section>
+    <div id="container"></div>
+</section>
+<!-- 尾部 -->
+<footer>
+    <nav class="page" aria-label="...">
+        <ul class="pagination">
+            <li class="disabled">
+              <span>
+                <span aria-hidden="true">&laquo;</span>
+              </span>
+            </li>
+            <li class="active">
+                <span>1 <span class="sr-only">(current)</span></span>
+            </li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <span>
+                    <span aria-hidden="true">&raquo;</span>
+                </span>
+            </li>
+        </ul>
+    </nav>
+    <p class="sig"><span>Copyright &copy; 2019 By Akashi_Sai</span></p>
+</footer>
+<script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="../js/index.js"></script>
+<script src="../lib/highcharts/js/highcharts.js"></script>
+<script src="../lib/highcharts/js/modules/exporting.js"></script>
+<script>
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        url: 'http://ec2-18-225-32-202.us-east-2.compute.amazonaws.com/stock?123&&token=14b1eddd4985fa1361684bb9018434bc&&stock_name=sz000938&&user=xnmd',
+        success:function (res) {
+           // console.log("html内部",res);
+           // res = JSON.parse(res);
+           // console.log(res.buy);
+            $("#price_unis").html("当前价格：<mark>￥" + res.current_price + "</mark>");
+            $("#buy_unis").html("Buy： ￥" + res.buy);
+            $("#sale_unis").html("Sale： ￥" + res.sale);
+            $("#number_unis").html("成交股票数：" + res.quantity/100 + "&nbsp;&nbsp;百股");
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        url: 'http://ec2-18-225-32-202.us-east-2.compute.amazonaws.com/stock?123&&token=14b1eddd4985fa1361684bb9018434bc&&stock_name=sz300042&&user=xnmd',
+        success:function (res) {
+            $("#price_netac").html("当前价格：<mark>￥" + res.current_price + "</mark>");
+            $("#buy_netac").html("Buy： ￥" + res.buy);
+            $("#sale_netac").html("Sale： ￥" + res.sale);
+            $("#number_netac").html("成交股票数：" + res.quantity/100 + "&nbsp;&nbsp;百股");
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        url: 'http://ec2-18-225-32-202.us-east-2.compute.amazonaws.com/stock?123&&token=14b1eddd4985fa1361684bb9018434bc&&stock_name=sz300017&&user=xnmd',
+        success:function (res) {
+            $("#price_wangsu").html("当前价格：<mark>￥" + res.current_price + "</mark>");
+            $("#buy_wangsu").html("Buy： ￥" + res.buy);
+            $("#sale_wangsu").html("Sale： ￥" + res.sale);
+            $("#number_wangsu").html("成交股票数：" + res.quantity/100 + "&nbsp;&nbsp;百股");
+        }
+    });
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        url: 'http://ec2-18-225-32-202.us-east-2.compute.amazonaws.com/stock?123&&token=14b1eddd4985fa1361684bb9018434bc&&stock_name=sz300024&&user=xnmd',
+        success:function (res) {
+            $("#price_robot").html("当前价格：<mark>￥" + res.current_price + "</mark>");
+            $("#buy_robot").html("Buy： ￥" + res.buy);
+            $("#sale_robot").html("Sale： ￥" + res.sale);
+            $("#number_robot").html("成交股票数：" + res.quantity/100 + "&nbsp;&nbsp;百股");
+        }
+    });
+    // $(document).ready(function () {
+    //     $('.btn').click(function () {
+    //         console.log($(this)[0].dataset.name);
+    //
+    //         $('#container').fadeToggle();
+    //         let stock_name = $(this)[0].dataset.name;
+    //
+    //     })
+    // });
+</script>
+</body>
+</html>
