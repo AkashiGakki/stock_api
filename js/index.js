@@ -38,10 +38,11 @@
                                 url: 'http://ec2-18-225-32-202.us-east-2.compute.amazonaws.com/stock?123&&token=14b1eddd4985fa1361684bb9018434bc&&stock_name= ' + stock_name + '&&user=xnmd',
                                 success:function (res) {
                                     y = parseFloat(res.current_price);
+                                    series.addPoint([x, y], true, true);
                                     // console.log(res);
                                 }
                             });
-                            series.addPoint([x, y], true, true);
+                            // series.addPoint([x, y], true, true);
 
                         }, 2000);
                     }
